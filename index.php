@@ -1,11 +1,22 @@
 <?php
-include(dirname(__FILE__).'/app/bootstrap.php');
+include(dirname(__FILE__).'/config/bootstrap.php');
 
-$tpl = new fTemplating($S["templates"].$S["theme"]);
-$tpl->buffer();
+fORMDatabase::attach(new fDatabase("mysql", "framework", "root", "root"));
 
-Toro::serve(array(
-    '/'     => 'IndexController'
-));
+$log = new loggar($_SERVER["DOCUMENT_ROOT"]."/logs/");
 
-echo content();
+$tpl = new fTemplating($_SERVER["DOCUMENT_ROOT"]."/themes/default/");
+
+// First order of business is to load the Site object
+$site = new Site();
+
+ToroHook::add("404", Errors::FourOhFour());
+
+//Toro::serve(array(
+//    '/'     => 'IndexController'
+//));
+
+
+var_dump($site);
+
+$tpl->place("page_content", "php");
