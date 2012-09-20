@@ -1,13 +1,4 @@
 <?php
-/**
- *
- */
-
 class Portal extends fActiveRecord{
-
-
-
-    function configure() {
-
-    }
+    // Shell for fActiveRecord access
 }
